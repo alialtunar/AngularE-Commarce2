@@ -16,6 +16,19 @@ namespace API.Infrastructure.Implements
         {
             _context = context;
         }
+
+        public async Task AddAsync(T Entity)
+        {
+            _context.Set<T>().Add(Entity);
+          await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(T Entity)
+        {
+            _context.Set<T>().Remove(Entity);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
@@ -24,6 +37,12 @@ namespace API.Infrastructure.Implements
         public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
+        }
+
+        public async Task UpdateAsync(T Entity)
+        {
+            _context.Entry(Entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

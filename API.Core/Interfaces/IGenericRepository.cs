@@ -11,5 +11,11 @@ namespace API.Core.Interfaces
         Task<T> GetByIdAsync(int id);
 
         Task<IReadOnlyList<T>> GetAllAsync();
+
+        Task AddAsync(T Entity);
+
+        Task UpdateAsync(T Entity);
+
+        Task DeleteAsync(T Entity);
     }
 }
