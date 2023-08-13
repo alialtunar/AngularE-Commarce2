@@ -17,7 +17,23 @@ namespace API.Infrastructure.Implements
             _context = context;
         }
 
-       
+        public async Task<IReadOnlyList<Product>> GetProductsWithIncludes()
+        {
+           return await _context.Products
+                .Include(p=>p.ProductBrand)
+                .Include(p=>p.ProductType)
+                .ToListAsync();
 
+        }
+
+        public async Task<Product> GetProductWithIncludesById(int id)
+        {
+            return await _context.Products
+                .Include(p => p.ProductBrand)
+                .Include(p => p.ProductType)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+
+        }
     }
 }

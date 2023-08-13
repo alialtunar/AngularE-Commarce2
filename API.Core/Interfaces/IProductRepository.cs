@@ -8,7 +8,8 @@ namespace API.Core.Interfaces
 {
     public interface IProductRepository: IGenericRepository<Product>
     {
-        
+        Task<IReadOnlyList<Product>> GetProductsWithIncludes();
+        Task<Product> GetProductWithIncludesById(int id);
     }
 }
 
