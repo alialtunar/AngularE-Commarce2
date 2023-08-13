@@ -28,5 +28,18 @@ namespace API.Controllers
 
             return Ok();
         }
+
+
+        [HttpGet("servererror")]
+        public ActionResult GetServerError()
+        {
+            var product = _context.Products.Find(10);
+
+            var ProductToReturn = product.ToString();
+
+            return Ok();
+        }
     }
+
+ 
 }
