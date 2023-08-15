@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using API.Infrastructure.Implements;
 using API.Helpers;
 using API.Middleware;
+using Microsoft.OpenApi.Models;
 
 namespace API
 {
@@ -29,6 +30,11 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-commarce", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +54,12 @@ namespace API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "E-Commarce AP");
+                });
 
             app.UseEndpoints(endpoints =>
             {

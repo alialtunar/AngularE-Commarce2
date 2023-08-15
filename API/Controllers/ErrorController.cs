@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace API.Controllers
 {   
     [Route("error/{code}")]
+    [ApiExplorerSettings(IgnoreApi =true)]
     public class ErrorController : BaseApiController
     {
         public IActionResult Index(int code)
