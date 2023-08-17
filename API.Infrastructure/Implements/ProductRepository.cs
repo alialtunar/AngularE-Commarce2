@@ -17,7 +17,7 @@ namespace API.Infrastructure.Implements
             _context = context;
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsWithIncludes()
+        public async Task<IReadOnlyList<Product>> GetProductsWithIncludes(ProductQueryParams productParams)
         {
            return await _context.Products
                 .Include(p=>p.ProductBrand)

@@ -16,7 +16,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("notfound")]
         public  ActionResult GetNotFoundRequest()
         {
             var product =  _context.Products.Find(10);
